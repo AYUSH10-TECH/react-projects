@@ -1,9 +1,18 @@
 import { LOGO_URL } from "../utils/constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
 
     let [btnNameReact, setBtnRameReact] = useState("Signed In")
+    console.log(' Header renderd')
+
+    // no empty array, it is called on every render
+    //if dependency array empty, it is called on initial render(just once)
+    //if dependency array is [something], => called everytime something is updated
+    useEffect(() => {
+        console.log('useEffect caled')
+    }, []);
 
     let btnName = "Login";
     return (
@@ -16,10 +25,11 @@ const Header = () => {
             </div>
             <div className="nav-items">
                 <ul>
-                    <li> Home</li>
-                    <li> About Us</li>
-                    <li> Contact Us</li>
-                    <li> Cart</li>
+                    <li><Link to = "/">Home</Link></li>
+                    <li><Link to = "/about"> About Us</Link></li>
+                    <li> 
+                        <Link to = "/contact">Contact Us</Link></li>
+                    <li><a href = "/contact">Cart</a></li>
                     <button className="login" onClick={() => {
                         btnNameReact === "Signed In" 
                         ? setBtnRameReact("Logout")
